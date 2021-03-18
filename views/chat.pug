@@ -29,6 +29,16 @@ html
       socket.on('create name', function(name){
       $('#name').val(name);
       });
+      socket.on('change name',function (oldname,name){
+      $('#name').val(name);
+      $('#chatLog').append('<알림>'+oldname+'님이'+ name +'으로 채팅명을 변경하셨습니다.'+'\n');
+      })
+      socket.on('new_connect', function (name){
+      $('#chatLog').append('<알림>'+name+'님이 채팅창에 입장하셨습니다.'+'\n');
+      });
+      socket.on('new_disconnect', function (name) {
+      $('#chatLog').append('<알림>'+name + '님이 채팅창에서 나가셨습니다.'+'\n');
+      });
       socket.on('receive message', function(msg){
       $('#chatLog').append(msg+'\n');
       $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
